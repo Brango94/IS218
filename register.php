@@ -1,57 +1,60 @@
 <?php
 
-$FName=$_POST["FName"];
-$LName=$_POST["LName"];
-$bday=$_POST["bday"];
-$email=$_POST["email"];
-$password=$_POST["password"];
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);  
+ini_set('display_errors' , 1);
+include('extra.php');
 
-if ($FName==""){
-	echo "First name is empty<br>";
+$first= $_GET["first"]; 
+$last= $_GET["last"];
+$bday= $_GET["bday"]; 
+$email= $_GET["email"];
+$pass= $_GET["pass"];
+$arr=array('First name'=>$first,
+			'Last name'=>$last,
+			'Birthday'=>$bday,
+			'Email'=>$email,
+			'Password'=>$pass);
+
+$flag=false;
+
+foreach($arr as $key => $value){
+	if ( empty($value)){ echo "<br><b>ERROR: $key is empty<br></b>"; $flag=true;}
+
+	else if ($key=='Email' && !strpos($value,'@') ){ 
+		echo"<br><b>ERROR: no @ in $key<br></b>"; $flag=true;}
+
+	else if($key=="Password" && strlen($value)<8 ){
+		echo "<br><b>ERROR:$key must be at least 8 characters<br></b>";$flag=true;}
+
+	else{ echo "<br><b> $key </b>: $value<br>";}
 }
 
-else {
-	echo "Your first name is $FName<br>";
+if (!$flag){
+	try{
+		$conn = new PDO("mysql:host=$servername;dbname=bsg23", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		echo "<br>Connected successfully <br>"; 
+		$stmt = $conn->prepare("INSERT INTO accounts (email,fname,lname,birthday,password) 
+			VALUES ('$email','$first','$last','$bday','$pass')");
+		$stmt->execute();
+		echo "<h2> Account created! </h2> <br> redirecting ...";
+		session_start();
+		$_SESSION['logged']=true;
+		$_SESSION["email"]=$email;
+		////REDIRECT TO DISPLAY
+		header("refresh:1; url=display.php");
+	}
+
+	catch(PDOException $e){
+		echo "<br> connection failed: ". $e->getMessage();
+	}
+
+	$conn = null;
 }
 
-if ($LName==""){
-	echo "Last name is empty<br>";
-}
-
-else {
-	echo "Your last name is $LName<br>";
-}
-
-if ($bday==""){
-	echo "Your birthday is empty<br>";
-}
-
-else {
-	echo "Your birthday is $bday<br>";
-}
-
-if ($email==""){
-    echo "Email is empty<br>";
-}
-
-elseif (!strpos($email,'@')){
-    echo "Need to have '@'<br>";
-}
-
-else {
-	echo "Your email is $email<br>";
-}
-
-if ($password==""){
-    echo "Password is empty<br>";
-}
-
-elseif (strlen($password)<8){
-    echo "Your password needs at least 8 characters<br>";
-}
-
-else {
-	echo "Your password is $password<br>";
+else{
+	echo "<h2> Invalid input, please try again! </h2> <br> redirecting ...";
+	header("refresh:1; url=register.html");
 }
 
 ?>

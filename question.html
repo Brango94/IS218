@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+	<title>Question</title>
+	<meta charset="UTF-8">
+
+</head>
 <body>
 
-<h2>Question Form</h2>
 
-<form method="post" action="question.php">
+	<div class="container-contact">
 
-	Question Name: <input type="text" name="qname"><br><br>
+		<div class="wrap-contact">
+			<form class="contact-form validate-form" action="question.php">
+				<span class="contact-form-title">
+					Enter Question
+				</span>
 
-	Question Body: <textarea name="qbody" rows="5" cols="40"></textarea><br><br>
+				<div class="wrap-input validate-input" data-validate="Enter question name">
+					<input class="input" type="text" name="qname" placeholder="Question Name">
+					<span class="focus-input"></span>
+				</div>
 
-	Question Skills: <input type="text" name="qskill"><br><br>
+				<div class="wrap-input validate-input" data-validate="Enter question body">
+					<input class="input" type="text" name="body" placeholder="Question Body">
+					<span class="focus-input"></span>
+				</div>
 
-	<input type="submit">
+				<div class="wrap-input validate-input" data-validate = "Enter skills">
+					<input class="input" type="text" name="skills" placeholder="Skills">
+					<span class="focus-input"></span>
+				</div>
 
-</form>
+				<div class="container-contact-form-btn">
+					<button class="contact-form-btn"> Submit
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 </body>
 </html>
