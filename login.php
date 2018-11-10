@@ -1,7 +1,4 @@
 <?php
-
-error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);  
-ini_set('display_errors' , true);
 include('extra.php');
 
 $email= $_GET["email"]; 
@@ -45,7 +42,7 @@ if (!$flag){
 
 		if (!$row){
 			header ("refresh:1; url=register.html" ); 
-			die('<h2> Cannot authenticate! </h2>');
+			die('<h2> Profile Not Found </h2>');
 		}
 
 		else {echo"<h2> Welcome </h2>";
@@ -58,7 +55,7 @@ if (!$flag){
 	}
 
 	catch (PDOException $e){
-		echo "<br> connection failed: ". $e->getMessage();
+		echo "<br> Failed Connection: ". $e->getMessage();
 	}
 
 	$conn = null;

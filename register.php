@@ -1,7 +1,4 @@
 <?php
-
-error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);  
-ini_set ('display_errors' , 1);
 include ('extra.php');
 
 $first = $_GET["first"]; 
@@ -10,10 +7,10 @@ $bday = $_GET["bday"];
 $email = $_GET["email"];
 $pass = $_GET["pass"];
 $arr = array ('First name'=>$first,
-			'Last name'=>$last,
-			'Birthday'=>$bday,
-			'Email'=>$email,
-			'Password'=>$pass);
+	'Last name'=>$last,
+	'Birthday'=>$bday,
+	'Email'=>$email,
+	'Password'=>$pass);
 
 $flag=false;
 
