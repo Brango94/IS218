@@ -5,4 +5,5 @@ $username = "bsg23";
 $password = "Faly0aJZJ";
 $dbname = "bsg23";
 
+
 ?>

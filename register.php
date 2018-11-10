@@ -1,15 +1,15 @@
 <?php
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);  
-ini_set('display_errors' , 1);
-include('extra.php');
+ini_set ('display_errors' , 1);
+include ('extra.php');
 
-$first= $_GET["first"]; 
-$last= $_GET["last"];
-$bday= $_GET["bday"]; 
-$email= $_GET["email"];
-$pass= $_GET["pass"];
-$arr=array('First name'=>$first,
+$first = $_GET["first"]; 
+$last = $_GET["last"];
+$bday = $_GET["bday"]; 
+$email = $_GET["email"];
+$pass = $_GET["pass"];
+$arr = array ('First name'=>$first,
 			'Last name'=>$last,
 			'Birthday'=>$bday,
 			'Email'=>$email,
@@ -17,16 +17,17 @@ $arr=array('First name'=>$first,
 
 $flag=false;
 
-foreach($arr as $key => $value){
-	if ( empty($value)){ echo "<br><b>ERROR: $key is empty<br></b>"; $flag=true;}
+foreach ($arr as $key => $value){
+	if (empty($value)){ echo "<br><b>ERROR: $key is empty<br></b>"; $flag=true;}
 
 	else if ($key=='Email' && !strpos($value,'@') ){ 
 		echo"<br><b>ERROR: no @ in $key<br></b>"; $flag=true;}
 
-	else if($key=="Password" && strlen($value)<8 ){
+	else if ($key=="Password" && strlen($value)<8 ){
 		echo "<br><b>ERROR:$key must be at least 8 characters<br></b>";$flag=true;}
 
-	else{ echo "<br><b> $key </b>: $value<br>";}
+	else {
+		echo "<br><b> $key </b>: $value<br>";}
 }
 
 if (!$flag){
@@ -41,18 +42,18 @@ if (!$flag){
 		session_start();
 		$_SESSION['logged']=true;
 		$_SESSION["email"]=$email;
-		////REDIRECT TO DISPLAY
+		
 		header("refresh:1; url=display.php");
 	}
 
-	catch(PDOException $e){
+	catch (PDOException $e){
 		echo "<br> connection failed: ". $e->getMessage();
 	}
 
 	$conn = null;
 }
 
-else{
+else {
 	echo "<h2> Invalid input, please try again! </h2> <br> redirecting ...";
 	header("refresh:1; url=register.html");
 }

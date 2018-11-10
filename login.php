@@ -12,24 +12,26 @@ if (empty($email)){
 	echo "<b>ERROR: email is empty</b>"; 
 	$flag=true ;}
 
-else if(!strpos($email,'@')) { 
+else if (!strpos($email,'@')) { 
 	echo"<br><b> ERROR:</b> no @ <br>"; 
 	$flag=true;}
 
-else{ echo "<br><b>Email: </b> $email <br>"; }
+else {
+	echo "<br><b>Email: </b> $email <br>"; }
 
 if (empty($pass)){ 
 	echo "<b><br>ERROR: Password is empty <br></b>"; 
 	$flag=true; }
 
-else if(strlen($pass)<8 ){ 
+else if (strlen($pass)<8 ){ 
 	echo "<b><br>ERROR: Password must be at least 8 characters</b><br>" ; 
 	$flag=true;}
 
-else{ echo "<br><b>Password: </b> $pass <br>"; }
+else {
+	echo "<br><b>Password: </b> $pass <br>"; }
 
 if (!$flag){
-	try{
+	try {
 		$conn = new PDO("mysql:host=$servername;dbname=bsg23", $username, $password);
 		
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,12 +43,12 @@ if (!$flag){
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$id=$row['id'];
 
-		if( ! $row){
+		if (!$row){
 			header ("refresh:1; url=register.html" ); 
 			die('<h2> Cannot authenticate! </h2>');
 		}
 
-		else{ echo"<h2> Welcome </h2>";
+		else {echo"<h2> Welcome </h2>";
 			session_start();
 			$_SESSION['logged']=true;
 			$_SESSION["email"]=$email;
@@ -55,7 +57,7 @@ if (!$flag){
 		}
 	}
 
-	catch(PDOException $e){
+	catch (PDOException $e){
 		echo "<br> connection failed: ". $e->getMessage();
 	}
 
