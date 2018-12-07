@@ -1,3 +1,35 @@
+<?php include ('view/header.php');?>
+
+	<div class="container-contract">
+		<div class="wrap-contract">
+
+			<form class="contract-form validate-form" action="." method="post">
+				<span class="contact-form-title">
+					Login
+				</span>
+
+				<div class="wrap-input validate-input" data-validate="Enter Name">
+					<input class="input" type="text" name="email" placeholder="Email">
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<div class="wrap-input validate-input" data-validate = "Enter Password">
+					<input class="input" type="text" name="pass" placeholder="Password">
+					<span class="focus-input"></span>
+				</div>
+
+				<div class="container-contact-form-btn">
+					<button class="contact-form-btn">
+						<span>
+							Submit
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 <?php
 include('extra.php');
 
